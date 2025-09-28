@@ -6,7 +6,7 @@ Olá! Este repositório reúne os principais projetos e exercícios que desenvol
 
 Aqui está uma lista dos projetos contidos neste repositório. Clique no nome para navegar até a pasta e ver os detalhes de cada um.
 
-* **Projeto Contas Bancárias (./projeto-contas-bancarias/)**
+* **[Projeto Contas Bancárias](./Projeto-Contas-Bancarias/)**
     * Simula uma conta poupança
 
 * **[Nome do Projeto 2: Ex: Jogo de Xadrez](./nome-da-pasta-do-projeto-2/)**

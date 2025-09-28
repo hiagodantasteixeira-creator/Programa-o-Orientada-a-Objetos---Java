@@ -9,7 +9,7 @@ Aqui está uma lista dos projetos contidos neste repositório. Clique no nome pa
 * **[Projeto Contas Bancárias](./Projeto-Contas-Bancarias/)**
     * Simula uma conta poupança
 
-* **[Projeto Aluno Mestrando](./Aluno-Mestrando/)**
+* **[Projeto Aluno Mestrando](./Projeto-Aluno-Mestrando/)**
     * Simula a inserção de dados de um aluno no mestrado 
 
 ## 🛠️ Tecnologias Utilizadas

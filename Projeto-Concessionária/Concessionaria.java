@@ -7,6 +7,7 @@ package concessionaria;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 /**
  *
  * @author hiago
@@ -24,11 +25,44 @@ public class Concessionaria implements OperacoesConcessionaria{
         minhaLoja.executar();
     }
     
+    private int lerInt(String mensagem) {
+        while (true) { 
+            try {
+                System.out.print(mensagem);
+                int numero = input.nextInt();
+                input.nextLine(); 
+                return numero; 
+            }
+            catch (InputMismatchException e) {
+                System.err.println("Exceção: " + e);
+                input.nextLine(); 
+                System.out.println("Entre com valores inteiros");
+            }
+        }
+    }
+
+    private double lerDouble(String mensagem) {
+        while (true) {
+            try {
+                System.out.print(mensagem);
+                double numero = input.nextDouble();
+                input.nextLine();
+                return numero;
+            } 
+            catch (java.util.InputMismatchException e) {
+                System.err.println("Exceção: " + e);
+                input.nextLine(); 
+                System.out.println("Entre com valores flutuantes");
+            }
+        }
+    }
+    
     public void executar() {
         int opcaoPrincipal = -1;
         while (opcaoPrincipal != 0) {
             exibirMenuPrincipal();
-            opcaoPrincipal = input.nextInt();
+            opcaoPrincipal = lerInt("Escolha uma opção: ");
+            
             if (opcaoPrincipal == 1) {
                 menuCliente();
             } 
@@ -48,7 +82,6 @@ public class Concessionaria implements OperacoesConcessionaria{
                 System.out.println("Opção inválida!");
             }
         }
-        input.close();
     }
 
     private void exibirMenuPrincipal() {
@@ -58,7 +91,6 @@ public class Concessionaria implements OperacoesConcessionaria{
         System.out.println("3 - Gerenciar Veículos");
         System.out.println("4 - Gerenciar Vendas");
         System.out.println("0 - Sair do Sistema");
-        System.out.print("Escolha uma opção: ");
     }
 
     private void menuCliente() {
@@ -69,10 +101,10 @@ public class Concessionaria implements OperacoesConcessionaria{
             System.out.println("2 - Consultar Cliente");
             System.out.println("3 - Alterar Cliente");
             System.out.println("4 - Remover Cliente");
+            System.out.println("5 - Relatório de Clientes");
             System.out.println("0 - Voltar ao Menu Principal");
-            System.out.print("Escolha uma operação: ");
-            operacao = input.nextInt();
-            input.nextLine();
+            
+            operacao = lerInt("Escolha uma operação: ");
             
             if (operacao == 1) {
                 cadastrarCliente();
@@ -86,6 +118,9 @@ public class Concessionaria implements OperacoesConcessionaria{
             else if (operacao == 4) {
                 removerCliente();
             } 
+            else if (operacao == 5) {
+                relatorioClientes();
+            }
             else if (operacao == 0) {
                 System.out.println("Voltando ao menu principal...");
             } 
@@ -103,10 +138,10 @@ public class Concessionaria implements OperacoesConcessionaria{
             System.out.println("2 - Consultar Funcionário");
             System.out.println("3 - Alterar Funcionário");
             System.out.println("4 - Remover Funcionário");
+            System.out.println("5 - Relatório de Funcionários");
             System.out.println("0 - Voltar ao Menu Principal");
-            System.out.print("Escolha uma operação: ");
-            operacao = input.nextInt();
-            input.nextLine();
+            
+            operacao = lerInt("Escolha uma operação: ");
             
             if (operacao == 1) {
                 cadastrarFuncionario();
@@ -120,6 +155,9 @@ public class Concessionaria implements OperacoesConcessionaria{
             else if (operacao == 4) {
                 removerFuncionario();
             } 
+            else if (operacao == 5) {
+                relatorioFuncionarios();
+            }
             else if (operacao == 0) {
                 System.out.println("Voltando ao menu principal...");
             } 
@@ -137,10 +175,10 @@ public class Concessionaria implements OperacoesConcessionaria{
             System.out.println("2 - Consultar Veículo");
             System.out.println("3 - Alterar Veículo");
             System.out.println("4 - Remover Veículo");
+            System.out.println("5 - Relatório de Veículos");
             System.out.println("0 - Voltar ao Menu Principal");
-            System.out.print("Escolha uma operação: ");
-            operacao = input.nextInt();
-            input.nextLine();
+            
+            operacao = lerInt("Escolha uma operação: ");
             
             if (operacao == 1) {
                 cadastrarVeiculo();
@@ -154,6 +192,9 @@ public class Concessionaria implements OperacoesConcessionaria{
             else if (operacao == 4) {
                 removerVeiculo();
             } 
+            else if (operacao == 5) {
+                relatorioVeiculos();
+            }
             else if (operacao == 0) {
                 System.out.println("Voltando ao menu principal...");
             } 
@@ -171,10 +212,10 @@ public class Concessionaria implements OperacoesConcessionaria{
             System.out.println("2 - Consultar Venda");
             System.out.println("3 - Alterar Venda");
             System.out.println("4 - Remover Venda");
+            System.out.println("5 - Relatório de Vendas");
             System.out.println("0 - Voltar ao Menu Principal");
-            System.out.print("Escolha uma operação: ");
-            operacao = input.nextInt();
-            input.nextLine();
+            
+            operacao = lerInt("Escolha uma operação: ");
             
             if (operacao == 1) {
                 cadastrarVenda();
@@ -188,6 +229,9 @@ public class Concessionaria implements OperacoesConcessionaria{
             else if (operacao == 4) {
                 removerVenda();
             } 
+            else if (operacao == 5) {
+                relatorioVendas();
+            }
             else if (operacao == 0) {
                 System.out.println("Voltando ao menu principal...");
             } 
@@ -201,33 +245,37 @@ public class Concessionaria implements OperacoesConcessionaria{
     public void cadastrarCliente(){
         System.out.print("Digite o nome do cliente: ");
         String nome = input.nextLine();
-        System.out.print("Digite o CPF do cliente: ");
-        String cpf = input.nextLine();
-        System.out.print("Digite o enderço do cliente: ");
-        String endereco = input.nextLine();
-        System.out.print("Digite o número de telefone do cliente: ");
+        
+        System.out.print("Digite o telefone do cliente: ");
         String numTelefone = input.nextLine();
+        
         System.out.print("Digite o email do cliente: ");
         String email = input.nextLine();
-        Cliente novoCliente = new Cliente(nome, cpf, endereco, numTelefone, email);
+        
+        System.out.print("Digite o RG do cliente: ");
+        String rg = input.nextLine();
+        
+        System.out.print("Digite o CPF do cliente: ");
+        String cpf = input.nextLine();
+        
+        Cliente novoCliente = new Cliente(nome, numTelefone, email, rg, cpf);
         this.clientes.add(novoCliente);
+        
         System.out.println("Cliente cadastrado com sucesso!");
     }
     
     @Override
     public Cliente consultarCliente(){
-        if (clientes.size() > 0){
+        if (!clientes.isEmpty()){
             System.out.println("\n--- Lista de Clientes Cadastrados ---");
             for (int i = 0; i < clientes.size(); i++) {
                 System.out.println((i + 1) + " - " + clientes.get(i).getNome());
             }
             System.out.println("-------------------------------------");
 
-            System.out.print("Digite o NÚMERO do cliente: ");
-            int escolha = input.nextInt();
-            input.nextLine(); 
+            int escolha = lerInt("Digite o número do cliente: ");
 
-            if (escolha > 0 && escolha <= clientes.size()) {
+            if(escolha > 0 && escolha <= clientes.size()) {
                 Cliente clienteEscolhido = clientes.get(escolha - 1);
                 clienteEscolhido.exibeCliente();
                 return clienteEscolhido;
@@ -250,23 +298,23 @@ public class Concessionaria implements OperacoesConcessionaria{
             System.out.print("Digite o novo nome do cliente: ");
             String novoNome = input.nextLine();
             
-            System.out.print("Digite o novo CPF do cliente: ");
-            String novoCpf = input.nextLine();
-            
-            System.out.print("Digite o novo enderço do cliente: ");
-            String novoEndereco = input.nextLine();
-            
-            System.out.print("Digite o novo número de telefone do cliente: ");
+            System.out.print("Digite o novo telefone do cliente: ");
             String novoNumTelefone = input.nextLine();
-           
+            
             System.out.print("Digite o novo email do cliente: ");
             String novoEmail = input.nextLine();
             
+            System.out.print("Digite o novo RG do cliente: ");
+            String novoRg = input.nextLine();
+           
+            System.out.print("Digite o novo CPF do cliente: ");
+            String novoCpf = input.nextLine();
+            
             clienteParaAlterar.setNome(novoNome);
-            clienteParaAlterar.setCpf(novoCpf);
-            clienteParaAlterar.setEndereco(novoEndereco);
             clienteParaAlterar.setNumTelefone(novoNumTelefone);
             clienteParaAlterar.setEmailPessoal(novoEmail);
+            clienteParaAlterar.setRg(novoRg);
+            clienteParaAlterar.setCpf(novoCpf);
 
             System.out.println("\nCliente alterado com sucesso!");
 
@@ -289,35 +337,49 @@ public class Concessionaria implements OperacoesConcessionaria{
     }  
     
     @Override
+    public void relatorioClientes() {
+        System.out.println("\n--- Relatório Completo de Clientes ---");
+        if (clientes.isEmpty()) {
+            System.out.println("Nenhum cliente cadastrado.");
+            return;
+        }
+        for (Cliente cliente : clientes) {
+            cliente.exibeCliente(); 
+            System.out.println(); 
+        }
+    }
+    
+    @Override
     public void cadastrarFuncionario(){
         System.out.print("Digite o nome do funcionario: ");
         String nome = input.nextLine();
-        System.out.print("Digite o CPF do funcionario: ");
-        String cpf = input.nextLine();
-        System.out.print("Digite o enderço do funcionario: ");
-        String endereco = input.nextLine();
-        System.out.print("Digite o número de telefone do funcionario: ");
-        String numTelefone = input.nextLine();
-        System.out.print("Digite o salário do funcionario: ");
-        double salario = input.nextDouble();
-        input.nextLine();
-        Funcionario novoFuncionario = new Funcionario(nome, cpf, endereco, numTelefone, salario);
+        
+        int numMatricula = lerInt("Digite o número de matrícula do funcionario: ");
+        
+        System.out.print("Digite a qualificação do funcionario: ");
+        String qualificacao = input.nextLine();
+        
+        System.out.print("Digite a descrição da função do funcionario: ");
+        String descricaoFuncao = input.nextLine();
+        
+        int cargaHorariaSemanal = lerInt("Digite a carga horária semanal do funcionario: ");
+        
+        Funcionario novoFuncionario = new Funcionario(nome, numMatricula, qualificacao, descricaoFuncao, cargaHorariaSemanal);
         this.funcionarios.add(novoFuncionario);
+        
         System.out.println("Funcionário cadastrado com sucesso!");
     }
     
     @Override
     public Funcionario consultarFuncionario(){
-            if (funcionarios.size() > 0){
+            if (!funcionarios.isEmpty()){
             System.out.println("\n--- Lista de Funcionários Cadastrados ---");
             for (int i = 0; i < funcionarios.size(); i++) {
                 System.out.println((i + 1) + " - " + funcionarios.get(i).getNome());
             }
             System.out.println("-------------------------------------");
 
-            System.out.print("Digite o NÚMERO do Funcionário: ");
-            int escolha = input.nextInt();
-            input.nextLine(); 
+            int escolha = lerInt("Digite o número do Funcionário: ");
 
             if (escolha > 0 && escolha <= funcionarios.size()) {
                 Funcionario funcionarioEscolhido = funcionarios.get(escolha - 1);
@@ -342,24 +404,21 @@ public class Concessionaria implements OperacoesConcessionaria{
             System.out.print("Digite o novo nome do funcionario: ");
             String novoNome = input.nextLine();
             
-            System.out.print("Digite o novo CPF do funcionario: ");
-            String novoCpf = input.nextLine();
+            int novoNumMatricula = lerInt("Digite o novo número da matrícula do funcionario: ");
             
-            System.out.print("Digite o novo enderço do funcionario: ");
-            String novoEndereco = input.nextLine();
+            System.out.print("Digite a nova qualificação do funcionario: ");
+            String novaQualificacao = input.nextLine();
             
-            System.out.print("Digite o novo número de telefone do funcionario: ");
-            String novoNumTelefone = input.nextLine();
+            System.out.print("Digite o novo descrição da função do funcionario: ");
+            String novaDescricao = input.nextLine();
            
-            System.out.print("Digite o novo salário do funcionario: ");
-            double novoSalario = input.nextDouble();
-            input.nextLine();
+            int novaCarga = lerInt("Digite a nova carga horária semanal do funcionario: ");
             
             funcionarioParaAlterar.setNome(novoNome);
-            funcionarioParaAlterar.setCpf(novoCpf);
-            funcionarioParaAlterar.setEndereco(novoEndereco);
-            funcionarioParaAlterar.setNumTelefone(novoNumTelefone);
-            funcionarioParaAlterar.setSalario(novoSalario); 
+            funcionarioParaAlterar.setNumMatricula(novoNumMatricula);
+            funcionarioParaAlterar.setQualificacao(novaQualificacao);
+            funcionarioParaAlterar.setDescricaoFuncao(novaDescricao);
+            funcionarioParaAlterar.setCargaHorariaSemanal(novaCarga); 
 
             System.out.println("\nFuncionário alterado com sucesso!");
 
@@ -383,34 +442,52 @@ public class Concessionaria implements OperacoesConcessionaria{
     }
     
     @Override
+     public void relatorioFuncionarios() {
+        System.out.println("\n--- Relatório Completo de Funcionários ---");
+        if (funcionarios.isEmpty()) {
+            System.out.println("Nenhum funcionário cadastrado.");
+            return;
+        }
+        for (Funcionario funcionario : funcionarios) {
+            funcionario.exibeFuncionario();
+            System.out.println(); 
+        }
+    }
+    
+    @Override
     public void cadastrarVeiculo(){
-        System.out.print("Digite o modelo do veículo: ");
-        String modelo = input.nextLine();
-        System.out.print("Digite o motor do veículo: ");
-        String motor = input.nextLine();
-        System.out.print("Digite o câmbio do veículo: ");
-        String cambio = input.nextLine();
+        System.out.print("Digite o nome do veículo: ");
+        String nome = input.nextLine();
+        
         System.out.print("Digite a cor do veículo: ");
         String cor = input.nextLine();
-        System.out.print("Digite a utilização do veículo: ");
-        String utilizacao = input.nextLine();
-        Veiculo novoVeiculo = new Veiculo(modelo, motor, cambio, cor, utilizacao);
+        
+        int numMarchas = lerInt("Digite o número de marchas do veículo: ");
+        
+        int numPortas = lerInt("Digite o número de portas do veículo: ");
+        
+        System.out.print("Digite a marca do veículo: ");
+        String marca = input.nextLine();
+        
+        System.out.println("Digite o ano de fabricaçaõ do veículo: ");
+        String anoFabricacao = input.nextLine();
+        
+        Veiculo novoVeiculo = new Veiculo(nome, cor, numMarchas, numPortas, marca, anoFabricacao);
         this.veiculos.add(novoVeiculo);
+        
         System.out.println("Veiculo cadastrado com sucesso!");
     }
     
     @Override
     public Veiculo consultarVeiculo(){
-            if (veiculos.size() > 0){
+            if (!veiculos.isEmpty()){
             System.out.println("\n--- Lista de Veiculos Cadastrados ---");
             for (int i = 0; i < veiculos.size(); i++) {
-                System.out.println((i + 1) + " - " + veiculos.get(i).getModelo());
+                System.out.println((i + 1) + " - " + veiculos.get(i).getNome());
             }
             System.out.println("-------------------------------------");
 
-            System.out.print("Digite o NÚMERO do veículo: ");
-            int escolha = input.nextInt();
-            input.nextLine(); 
+            int escolha = lerInt("Digite o número do veículo: ");
 
             if (escolha > 0 && escolha <= veiculos.size()) {
                 Veiculo veiculoEscolhido = veiculos.get(escolha - 1);
@@ -432,26 +509,28 @@ public class Concessionaria implements OperacoesConcessionaria{
     public void alterarVeiculo(){
         Veiculo veiculoParaAlterar = consultarVeiculo();
         if (veiculoParaAlterar != null) {
-            System.out.print("Digite o novo modelo do veículo: ");
-            String novoModelo = input.nextLine();
-            
-            System.out.print("Digite o novo motor do veículo: ");
-            String novoMotor = input.nextLine();
-            
-            System.out.print("Digite o novo câmbio do veículo: ");
-            String novoCambio = input.nextLine();
+            System.out.print("Digite o novo nome do veículo: ");
+            String novoNome = input.nextLine();
             
             System.out.print("Digite a nova cor do veículo: ");
             String novaCor = input.nextLine();
-           
-            System.out.print("Digite a nova utilização do veículo: ");
-            String novaUtilizacao = input.nextLine();
+
+            int novoNumMarchas = lerInt("Digite o novo número de marchas do veículo: ");
             
-            veiculoParaAlterar.setModelo(novoModelo);
-            veiculoParaAlterar.setMotor(novoMotor);
-            veiculoParaAlterar.setCambio(novoCambio);
+            int novoNumPortas = lerInt("Digite o novo número de portas do veículo: ");
+            
+            System.out.print("Digite a nova marca do veículo: ");
+            String novaMarca = input.nextLine();
+           
+            System.out.print("Digite o novo ano de fabricação do veículo: ");
+            String novoAno = input.nextLine();
+            
+            veiculoParaAlterar.setNome(novoNome);
             veiculoParaAlterar.setCor(novaCor);
-            veiculoParaAlterar.setUtilizacao(novaUtilizacao);
+            veiculoParaAlterar.setNumMarchas(novoNumMarchas);
+            veiculoParaAlterar.setNumPortas(novoNumPortas);
+            veiculoParaAlterar.setMarca(novaMarca);
+            veiculoParaAlterar.setAnoFabricacao(novoAno);
 
             System.out.println("\nVeiculo alterado com sucesso!");
 
@@ -474,25 +553,38 @@ public class Concessionaria implements OperacoesConcessionaria{
     }
     
     @Override
+     public void relatorioVeiculos() {
+        System.out.println("\n--- Relatório Completo de Veículos ---");
+        if (veiculos.isEmpty()) {
+            System.out.println("Nenhum veículo cadastrado.");
+            return;
+        }
+        for (Veiculo veiculo : veiculos) {
+            veiculo.exibeVeiculo();
+            System.out.println(); 
+        }
+    }
+    
+    @Override
     public void cadastrarVenda(){
-        if (clientes.size() > 0 && funcionarios.size() > 0 && veiculos.size() > 0){
-            System.out.print("Digite o ID da venda: ");
-            int id = input.nextInt();
-            input.nextLine();
-            System.out.print("Digite o valor total da venda: ");
-            double valor = input.nextDouble();
-            input.nextLine();
-            System.out.print("Digite o desconto da venda: ");
-            double desconto = input.nextDouble();
-            input.nextLine();
+        if (!clientes.isEmpty() && !funcionarios.isEmpty() && !veiculos.isEmpty()){
+            System.out.print("Digite a data da venda: ");
+            String data = input.nextLine();
+  
+            double valor = lerDouble("Digite o valor da venda: ");
+     
             System.out.print("Cliente da venda: ");
             Cliente cliente = consultarCliente();
+            
             System.out.print("O funcionario da venda: ");
             Funcionario funcionario = consultarFuncionario();
+            
             System.out.println("O veículo da venda: ");
             Veiculo veiculo = consultarVeiculo();
-            Venda novaVenda = new Venda(id, valor, desconto, cliente, funcionario, veiculo);
+            
+            Venda novaVenda = new Venda(data, valor, cliente, funcionario, veiculo);
             this.vendas.add(novaVenda);
+            
             System.out.println("Veiculo cadastrado com sucesso!");
         }
         else{
@@ -502,16 +594,14 @@ public class Concessionaria implements OperacoesConcessionaria{
     
     @Override
     public Venda consultarVenda(){
-        if (vendas.size() > 0){
+        if (!vendas.isEmpty()){
             System.out.println("\n--- Lista de Vendas Cadastradas ---");
             for (int i = 0; i < vendas.size(); i++) {
-                System.out.println((i + 1) + " - " + vendas.get(i).getId());
+                System.out.println((i + 1) + " - " + vendas.get(i).getVeiculo().getNome());
             }
             System.out.println("-------------------------------------");
 
-            System.out.print("Digite o NÚMERO do venda: ");
-            int escolha = input.nextInt();
-            input.nextLine(); 
+            int escolha = lerInt("Digite o número do venda: ");
 
             if (escolha > 0 && escolha <= vendas.size()) {
                 Venda vendaEscolhida = vendas.get(escolha - 1);
@@ -533,17 +623,10 @@ public class Concessionaria implements OperacoesConcessionaria{
     public void alterarVenda(){
         Venda vendaParaAlterar = consultarVenda();
         if (vendaParaAlterar != null) {
-            System.out.print("Digite o novo ID da venda: ");
-            int novoId = input.nextInt();
-            input.nextLine();
+            System.out.print("Digite a nova data da venda: ");
+            String novaData = input.nextLine();
             
-            System.out.print("Digite o novo valor total da venda: ");
-            double novoValor = input.nextDouble();
-            input.nextLine();
-            
-            System.out.print("Digite o novo desconto da venda: ");
-            double novoDesconto = input.nextDouble();
-            input.nextLine();
+            double novoValor = lerDouble("Digite o novo valor da venda: ");
             
             System.out.print("Altere o cliente da venda: ");
             Cliente novoCliente = consultarCliente();
@@ -554,9 +637,8 @@ public class Concessionaria implements OperacoesConcessionaria{
             System.out.println("Altere o veículo da venda: ");
             Veiculo novoVeiculo = consultarVeiculo();
             
-            vendaParaAlterar.setId(novoId);
-            vendaParaAlterar.setValorTotal(novoValor);
-            vendaParaAlterar.setDesconto(novoDesconto);
+            vendaParaAlterar.setData(novaData);
+            vendaParaAlterar.setValor(novoValor);
             vendaParaAlterar.setCliente(novoCliente);
             vendaParaAlterar.setFuncionario(novoFuncionario);
             vendaParaAlterar.setVeiculo(novoVeiculo);
@@ -582,6 +664,19 @@ public class Concessionaria implements OperacoesConcessionaria{
         }
         else{
             System.out.println("Operação de remoção cancelada");
+        }
+    }
+    
+    @Override
+     public void relatorioVendas() {
+        System.out.println("\n--- Relatório Completo de Vendas ---");
+        if (vendas.isEmpty()) {
+            System.out.println("Nenhuma venda cadastrada.");
+            return;
+        }
+        for (Venda venda : vendas) {
+            venda.exibeVenda(); 
+            System.out.println(); 
         }
     }
     

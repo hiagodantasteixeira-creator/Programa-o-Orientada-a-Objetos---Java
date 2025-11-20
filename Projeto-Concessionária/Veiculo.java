@@ -2,49 +2,35 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package concessionaria;
+package model;
 
 /**
  *
  * @author hiago
  */
 public class Veiculo {
-    private String modelo;
-    private String motor;
-    private String cambio;
+    private String nome;
     private String cor;
-    private String utilizacao;
-    
-    public Veiculo(String modelo, String motor, String cambio, String cor, String utilizacao) {
-        this.modelo = modelo;
-        this.motor = motor;
-        this.cambio = cambio;
+    private int numMarchas;
+    private int numPortas;
+    private String marca;
+    private String anoFabricacao;
+
+    public Veiculo(String nome, String cor, int numMarchas, int numPortas, String marca, String anoFabricacao) {
+        this.nome = nome;
         this.cor = cor;
-        this.utilizacao = utilizacao;
+        this.numMarchas = numMarchas;
+        this.numPortas = numPortas;
+        this.marca = marca;
+        this.anoFabricacao = anoFabricacao;
     }
 
-    public String getModelo() {
-        return modelo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public String getMotor() {
-        return motor;
-    }
-
-    public void setMotor(String motor) {
-        this.motor = motor;
-    }
-
-    public String getCambio() {
-        return cambio;
-    }
-
-    public void setCambio(String cambio) {
-        this.cambio = cambio;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getCor() {
@@ -55,21 +41,48 @@ public class Veiculo {
         this.cor = cor;
     }
 
-    public String getUtilizacao() {
-        return utilizacao;
+    public int getNumMarchas() {
+        return numMarchas;
     }
 
-    public void setUtilizacao(String utilizacao) {
-        this.utilizacao = utilizacao;
+    public void setNumMarchas(int numMarchas) {
+        this.numMarchas = numMarchas;
     }
+
+    public int getNumPortas() {
+        return numPortas;
+    }
+
+    public void setNumPortas(int numPortas) {
+        this.numPortas = numPortas;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getAnoFabricacao() {
+        return anoFabricacao;
+    }
+
+    public void setAnoFabricacao(String anoFabricacao) {
+        this.anoFabricacao = anoFabricacao;
+    }
+    
+    
  
     public void exibeVeiculo(){
         System.out.println("--- Detalhes do Veiculo ---");
-        System.out.println("Modelo: " + getModelo()); 
-        System.out.println("Motor: " + getMotor()); 
-        System.out.println("Câmbio: " + getCambio()); 
+        System.out.println("Nome: " + getNome()); 
         System.out.println("Cor: " + getCor()); 
-        System.out.println("Utilização: " + getUtilizacao());
+        System.out.println("Número de marchas: " + getNumMarchas()); 
+        System.out.println("Número de portas: " + getNumPortas()); 
+        System.out.println("Marca: " + getMarca());
+        System.out.println("Ano de fabricação" + getAnoFabricacao());
         System.out.println("---------------------------");
     }
 }

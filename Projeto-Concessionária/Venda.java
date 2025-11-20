@@ -1,4 +1,8 @@
-package concessionaria;
+package model;
+
+import model.Veiculo;
+import model.Funcionario;
+import model.Cliente;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -10,45 +14,34 @@ package concessionaria;
  * @author hiago
  */
 public class Venda{
-    private int id;
-    private double valorTotal;
-    private double desconto;
+    private String data;
+    private double valor;
     private Cliente cliente;
     private Funcionario funcionario;
     private Veiculo veiculo;
 
-
-    public Venda(int id, double valorTotal, double desconto, Cliente cliente, Funcionario funcionario, Veiculo veiculo) {
-        this.id = id;
-        this.valorTotal = valorTotal;
-        this.desconto = desconto;
+    public Venda(String data, double valor, Cliente cliente, Funcionario funcionario, Veiculo veiculo) {
+        this.data = data;
+        this.valor = valor;
         this.cliente = cliente;
         this.funcionario = funcionario;
         this.veiculo = veiculo;
     }
 
-    public int getId() {
-        return id;
+    public String getData() {
+        return data;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public double getDesconto() {
-        return desconto;
+    public double getValor() {
+        return valor;
     }
 
-    public void setDesconto(double desconto) {
-        this.desconto = desconto;
-    }
-    
-    public double getValorTotal() {
-        return valorTotal - desconto;
-    }
-
-    public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
     public Cliente getCliente() {
@@ -77,11 +70,11 @@ public class Venda{
     
     public void exibeVenda(){
         System.out.println("--- Detalhes da Venda ---");
-        System.out.println("Id: " + getId()); 
-        System.out.println("Valor Total: " + getValorTotal()); 
+        System.out.println("Data: " + getData()); 
+        System.out.println("Valor: " + getValor()); 
         System.out.println("Cliente: " + getCliente().getNome()); 
         System.out.println("Funcionário: " + getFuncionario().getNome());
-        System.out.println("Veículo: " + getVeiculo().getModelo());
+        System.out.println("Veículo: " + getVeiculo().getNome());
         System.out.println("---------------------------");
 }
 }

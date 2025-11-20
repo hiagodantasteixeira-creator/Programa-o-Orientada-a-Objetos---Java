@@ -1,65 +1,54 @@
-# 🚗 Projeto: Sistema de Gerenciamento de Concessionária
+# 🚗 Concessionária Dantas - Sistema de Gerenciamento
+
 ## 📖 Descrição
-Este projeto é um sistema de gerenciamento para uma concessionária de veículos, desenvolvido em Java e executado via console. O software foi criado como um exercício prático para aplicar os conceitos fundamentais da Programação Orientada a Objetos (POO), resultando em uma aplicação robusta e bem estruturada.
+Este projeto consiste em um sistema de gerenciamento para uma concessionária de veículos, desenvolvido em **Java**. Inicialmente criado como uma aplicação de console para estudo de **Programação Orientada a Objetos (POO)**, o projeto evoluiu para uma arquitetura profissional baseada no padrão **MVC (Model-View-Controller)** e agora conta com uma **Interface Gráfica (GUI)** utilizando **Swing**.
 
-O sistema permite gerenciar as principais entidades de uma concessionária: Clientes, Funcionários, Veículos e Vendas.
+O sistema permite gerenciar o fluxo completo da **Concessionária Dantas**, controlando Clientes, Funcionários, Veículos e Vendas através de um menu visual intuitivo.
 
-## ⚙️ Funcionalidades
-* Menu Interativo de Dois Níveis: Uma interface de texto amigável que guia o usuário primeiro pela escolha da entidade (Cliente, Funcionário, etc.) e depois pela operação desejada.
+## ⚙️ Funcionalidades e Atualizações
+O projeto passou por uma refatoração completa para melhorar a organização e a usabilidade:
 
-* Gerenciamento Completo (CRUD): Suporte completo para as quatro operações essenciais em todas as entidades:
+* **Arquitetura MVC:** O código foi reestruturado para separar as responsabilidades em camadas (Visão, Controle e Modelo).
+* **Interface Gráfica (GUI):** Substituição da interação via terminal por janelas interativas (`JFrame`), facilitando o uso por usuários finais.
+* **Menu Principal Visual:** Um painel central que permite navegação fácil entre os módulos do sistema.
+* **CRUD Completo via Formulários:** Cadastros, consultas, atualizações e remoções agora são feitos através de campos de texto e botões interativos.
+* **Relatórios em Tela:** Visualização de listagens de dados diretamente na interface gráfica, sem necessidade de ler o console.
 
-* Create (Cadastrar)
+## 🚧 Status do Projeto
+O sistema está em constante evolução. Abaixo, o status de desenvolvimento de cada módulo da interface gráfica:
 
-* Read (Consultar)
+* ✅ **Gerenciamento de Clientes:** **Completo**. Interface gráfica implementada para cadastro, busca, edição, remoção e relatórios.
+* 🔄 **Gerenciamento de Funcionários:** Em desenvolvimento (Lógica no Controller pronta, GUI em construção).
+* 🔄 **Gerenciamento de Veículos:** Em desenvolvimento (Lógica no Controller pronta, GUI em construção).
+* 🔄 **Gerenciamento de Vendas:** Em desenvolvimento (Lógica no Controller pronta, GUI em construção).
 
-* Update (Alterar)
+## 📂 Nova Estrutura de Pastas (MVC)
+A organização de pacotes foi atualizada para refletir o padrão de arquitetura:
 
-* Delete (Remover)
-
-* Armazenamento de Dados em Memória: Todas as informações são salvas em ArrayLists durante a execução do programa.
+* `src/view`: Contém as telas do sistema (ex: `MenuPrincipal`, `FormularioCliente`, `RelatorioCliente`). É a camada responsável pela interação com o usuário.
+* `src/controller`: Contém a classe `Concessionaria`, que atua como o orquestrador. Ela processa as requisições da View e gerencia as listas de dados.
+* `src/model`: Contém as classes que representam as entidades do negócio (`Cliente`, `Veiculo`, `Venda`, `Funcionario`).
+* `Interfaces`: O arquivo `OperacoesConcessionaria.java` garante que o Controller implemente todas as regras de negócio necessárias.
 
 ## 🧠 Conceitos de POO Aplicados
-O projeto foi cuidadosamente estruturado para aplicar os pilares da Programação Orientada a Objetos:
+Além dos conceitos iniciais, a nova versão reforça:
 
-* Herança: A reutilização de código é promovida através da superclasse Pessoa, que define atributos e comportamentos comuns para Cliente e Funcionario.
-
-* Encapsulamento: Todos os atributos das classes de modelo são declarados como private, e o acesso é controlado de forma segura por meio de métodos públicos (getters e setters).
-
-* Interface: A interface OperacoesConcessionaria define um contrato claro para a classe principal, garantindo que todas as funcionalidades de CRUD sejam implementadas e padronizadas.
-
-* Polimorfismo: A classe Concessionaria implementa a interface, fornecendo "formas" (polimorfos) concretas para os métodos definidos no contrato. A lógica de menu que chama diferentes métodos com base na entrada do usuário também é uma aplicação deste conceito.
-
-## 📂 Estrutura do Projeto
-Pessoa.java: Classe base que contém atributos comuns a clientes e funcionários (nome, cpf, etc.).
-
-Cliente.java e Funcionario.java: Subclasses que herdam de Pessoa e adicionam seus próprios atributos específicos.
-
-Veiculo.java e Venda.java: Classes de modelo que representam os veículos e as transações de venda, incluindo seus relacionamentos.
-
-OperacoesConcessionaria.java: Interface que define o contrato com todas as operações que a concessionária deve ser capaz de realizar.
-
-Concessionaria.java: Classe principal que atua como "controladora" da aplicação. Ela contém o método main, gerencia os menus, a interação com o usuário e as listas de dados.
+* **Herança e Polimorfismo:** Uso contínuo na estrutura de classes e na implementação de interfaces.
+* **Encapsulamento:** Proteção dos dados nas classes de modelo e uso de métodos de acesso.
+* **Eventos (Listeners):** Tratamento de ações do usuário (cliques de botões) nas classes de interface gráfica (`ActionListeners` no Swing).
+* **Acoplamento Fraco:** A camada de visualização (`view`) não manipula os dados diretamente, mas solicita ações ao controlador (`controller`).
 
 ## 🚀 Como Executar o Projeto
-Para compilar e executar este projeto localmente, siga os passos abaixo.
+Como o projeto agora possui múltiplos pacotes e dependências de interface gráfica Swing, recomenda-se o uso de uma IDE (NetBeans, IntelliJ ou Eclipse).
 
-* Pré-requisitos:
-É necessário ter o JDK (Java Development Kit) instalado e configurado em sua máquina.
+1.  **Clonar o repositório:**
+    ```bash
+    git clone [https://github.com/hiagodearaujodantasteixeira/Programa-o-Orientada-a-Objetos---Java.git](https://github.com/hiagodearaujodantasteixeira/Programa-o-Orientada-a-Objetos---Java.git)
+    ```
+2.  **Abrir na IDE:**
+    Importe o projeto na sua IDE de preferência.
+3.  **Executar:**
+    Localize a classe `view.MenuPrincipal` e execute o arquivo. A janela principal da aplicação será aberta.
 
-* Compilação:
-Abra um terminal ou prompt de comando na pasta src do seu projeto.
-
-Compile todos os arquivos .java do pacote concessionaria com o seguinte comando:
-
-
-javac concessionaria/*.java
-Execução:
-Após a compilação bem-sucedida, ainda na pasta src, execute a classe principal Concessionaria, especificando o nome completo (pacote + classe):
-
-
-java concessionaria.Concessionaria
-O programa iniciará e exibirá o menu principal no console.
-
-👤 Autor
-Hiago
+## 👤 Autor
+**Hiago de Araujo Dantas Teixeira**

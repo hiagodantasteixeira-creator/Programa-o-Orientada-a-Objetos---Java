@@ -2,8 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package concessionaria;
+package controller;
 
+// criar um arquivo pra cada operação
+
+import model.Venda;
+import model.Veiculo;
+import model.Funcionario;
+import model.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,11 +26,6 @@ public class Concessionaria implements OperacoesConcessionaria{
     private final List<Venda> vendas = new ArrayList<>();
     private final Scanner input = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        Concessionaria minhaLoja = new Concessionaria();
-        minhaLoja.executar();
-    }
-    
     private int lerInt(String mensagem) {
         while (true) { 
             try {
@@ -57,296 +58,58 @@ public class Concessionaria implements OperacoesConcessionaria{
         }
     }
     
-    public void executar() {
-        int opcaoPrincipal = -1;
-        while (opcaoPrincipal != 0) {
-            exibirMenuPrincipal();
-            opcaoPrincipal = lerInt("Escolha uma opção: ");
-            
-            if (opcaoPrincipal == 1) {
-                menuCliente();
-            } 
-            else if (opcaoPrincipal == 2) {
-                menuFuncionario();
-            } 
-            else if (opcaoPrincipal == 3) {
-                menuVeiculo();
-            } 
-            else if (opcaoPrincipal == 4) {
-                menuVenda();
-            } 
-            else if (opcaoPrincipal == 0) {
-                System.out.println("Encerrando o sistema...");
-            } 
-            else {
-                System.out.println("Opção inválida!");
-            }
-        }
-    }
-
-    private void exibirMenuPrincipal() {
-        System.out.println("\n--- Gerenciamento Concessionária ---");
-        System.out.println("1 - Gerenciar Clientes");
-        System.out.println("2 - Gerenciar Funcionários");
-        System.out.println("3 - Gerenciar Veículos");
-        System.out.println("4 - Gerenciar Vendas");
-        System.out.println("0 - Sair do Sistema");
-    }
-
-    private void menuCliente() {
-        int operacao = -1;
-        while (operacao != 0) {
-            System.out.println("\n--- Gerenciar Clientes ---");
-            System.out.println("1 - Cadastrar Cliente");
-            System.out.println("2 - Consultar Cliente");
-            System.out.println("3 - Alterar Cliente");
-            System.out.println("4 - Remover Cliente");
-            System.out.println("5 - Relatório de Clientes");
-            System.out.println("0 - Voltar ao Menu Principal");
-            
-            operacao = lerInt("Escolha uma operação: ");
-            
-            if (operacao == 1) {
-                cadastrarCliente();
-            } 
-            else if (operacao == 2) {
-                consultarCliente();
-            } 
-            else if (operacao == 3) {
-                alterarCliente();
-            } 
-            else if (operacao == 4) {
-                removerCliente();
-            } 
-            else if (operacao == 5) {
-                relatorioClientes();
-            }
-            else if (operacao == 0) {
-                System.out.println("Voltando ao menu principal...");
-            } 
-            else {
-                System.out.println("Operação inválida!");
-            }
-        }
-    }
-
-    private void menuFuncionario() {
-        int operacao = -1;
-        while (operacao != 0) {
-            System.out.println("\n--- Gerenciar Funcionário ---");
-            System.out.println("1 - Cadastrar Funcionário");
-            System.out.println("2 - Consultar Funcionário");
-            System.out.println("3 - Alterar Funcionário");
-            System.out.println("4 - Remover Funcionário");
-            System.out.println("5 - Relatório de Funcionários");
-            System.out.println("0 - Voltar ao Menu Principal");
-            
-            operacao = lerInt("Escolha uma operação: ");
-            
-            if (operacao == 1) {
-                cadastrarFuncionario();
-            } 
-            else if (operacao == 2) {
-                consultarFuncionario();
-            } 
-            else if (operacao == 3) {
-                alterarFuncionario();
-            } 
-            else if (operacao == 4) {
-                removerFuncionario();
-            } 
-            else if (operacao == 5) {
-                relatorioFuncionarios();
-            }
-            else if (operacao == 0) {
-                System.out.println("Voltando ao menu principal...");
-            } 
-            else {
-                System.out.println("Operação inválida!");
-            }
-        }
-    }
-    
-    private void menuVeiculo() {
-    int operacao = -1;
-        while (operacao != 0) {
-            System.out.println("\n--- Gerenciar Veículos ---");
-            System.out.println("1 - Cadastrar Veículo");
-            System.out.println("2 - Consultar Veículo");
-            System.out.println("3 - Alterar Veículo");
-            System.out.println("4 - Remover Veículo");
-            System.out.println("5 - Relatório de Veículos");
-            System.out.println("0 - Voltar ao Menu Principal");
-            
-            operacao = lerInt("Escolha uma operação: ");
-            
-            if (operacao == 1) {
-                cadastrarVeiculo();
-            } 
-            else if (operacao == 2) {
-                consultarVeiculo();
-            } 
-            else if (operacao == 3) {
-                alterarVeiculo();
-            } 
-            else if (operacao == 4) {
-                removerVeiculo();
-            } 
-            else if (operacao == 5) {
-                relatorioVeiculos();
-            }
-            else if (operacao == 0) {
-                System.out.println("Voltando ao menu principal...");
-            } 
-            else {
-                System.out.println("Operação inválida!");
-            }
-        }
-    }
-    
-    private void menuVenda() {
-        int operacao = -1;
-        while (operacao != 0) {
-            System.out.println("\n--- Gerenciar Vendas ---");
-            System.out.println("1 - Cadastrar Venda");
-            System.out.println("2 - Consultar Venda");
-            System.out.println("3 - Alterar Venda");
-            System.out.println("4 - Remover Venda");
-            System.out.println("5 - Relatório de Vendas");
-            System.out.println("0 - Voltar ao Menu Principal");
-            
-            operacao = lerInt("Escolha uma operação: ");
-            
-            if (operacao == 1) {
-                cadastrarVenda();
-            } 
-            else if (operacao == 2) {
-                consultarVenda();
-            } 
-            else if (operacao == 3) {
-                alterarVenda();
-            } 
-            else if (operacao == 4) {
-                removerVenda();
-            } 
-            else if (operacao == 5) {
-                relatorioVendas();
-            }
-            else if (operacao == 0) {
-                System.out.println("Voltando ao menu principal...");
-            } 
-            else {
-                System.out.println("Operação inválida!");
-            }
-        } 
-    }
-    
     @Override
-    public void cadastrarCliente(){
-        System.out.print("Digite o nome do cliente: ");
-        String nome = input.nextLine();
-        
-        System.out.print("Digite o telefone do cliente: ");
-        String numTelefone = input.nextLine();
-        
-        System.out.print("Digite o email do cliente: ");
-        String email = input.nextLine();
-        
-        System.out.print("Digite o RG do cliente: ");
-        String rg = input.nextLine();
-        
-        System.out.print("Digite o CPF do cliente: ");
-        String cpf = input.nextLine();
-        
-        Cliente novoCliente = new Cliente(nome, numTelefone, email, rg, cpf);
+    public void cadastrarCliente(String nome, String numTelefone, String emailPessoal, String rg, String cpf){
+        Cliente novoCliente = new Cliente(nome, numTelefone, emailPessoal, rg, cpf);
         this.clientes.add(novoCliente);
-        
-        System.out.println("Cliente cadastrado com sucesso!");
+        System.out.println("Novo cliente salvo na lista: " + novoCliente.getNome());
     }
     
     @Override
-    public Cliente consultarCliente(){
-        if (!clientes.isEmpty()){
-            System.out.println("\n--- Lista de Clientes Cadastrados ---");
-            for (int i = 0; i < clientes.size(); i++) {
-                System.out.println((i + 1) + " - " + clientes.get(i).getNome());
+    public Cliente consultarCliente(String cpf) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getCpf().equals(cpf)) {
+                return cliente; 
             }
-            System.out.println("-------------------------------------");
-
-            int escolha = lerInt("Digite o número do cliente: ");
-
-            if(escolha > 0 && escolha <= clientes.size()) {
-                Cliente clienteEscolhido = clientes.get(escolha - 1);
-                clienteEscolhido.exibeCliente();
-                return clienteEscolhido;
-            } 
-            else {
-                System.out.println("Opção inválida!");
-                return null;
-            }
-        }    
-        else {
-                System.out.println("Opção inválida!");
-                return null;    
-            }
+        }
+        return null;
     }
     
     @Override
-    public void alterarCliente(){
-        Cliente clienteParaAlterar = consultarCliente();
+    public void alterarCliente(String novoNome, String novoNumTelefone, String novoEmail, String cpf) {
+        Cliente clienteParaAlterar = this.consultarCliente(cpf); 
+
         if (clienteParaAlterar != null) {
-            System.out.print("Digite o novo nome do cliente: ");
-            String novoNome = input.nextLine();
-            
-            System.out.print("Digite o novo telefone do cliente: ");
-            String novoNumTelefone = input.nextLine();
-            
-            System.out.print("Digite o novo email do cliente: ");
-            String novoEmail = input.nextLine();
-            
-            System.out.print("Digite o novo RG do cliente: ");
-            String novoRg = input.nextLine();
-           
-            System.out.print("Digite o novo CPF do cliente: ");
-            String novoCpf = input.nextLine();
-            
             clienteParaAlterar.setNome(novoNome);
             clienteParaAlterar.setNumTelefone(novoNumTelefone);
             clienteParaAlterar.setEmailPessoal(novoEmail);
-            clienteParaAlterar.setRg(novoRg);
-            clienteParaAlterar.setCpf(novoCpf);
-
-            System.out.println("\nCliente alterado com sucesso!");
-
-            clienteParaAlterar.exibeCliente();
-        } 
-        else {
-        System.out.println("Operação de alteração cancelada.");
         }
     }
-    @Override
-    public void removerCliente(){
-        Cliente clienteRemove = consultarCliente();
-        if (clienteRemove != null) {
-            clientes.remove(clienteRemove);
-            System.out.println("Cliente removido com sucesso!");
-        }
-        else{
-            System.out.println("Operação de remoção cancelada");
-        }
-    }  
     
     @Override
-    public void relatorioClientes() {
-        System.out.println("\n--- Relatório Completo de Clientes ---");
+    public void removerCliente(String cpf) {
+        Cliente clienteParaRemover = this.consultarCliente(cpf);
+
+        if (clienteParaRemover != null) {
+            this.clientes.remove(clienteParaRemover);
+        }
+    }
+    
+    @Override
+    public String getRelatorioClientes() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("--- LISTA DE CLIENTES ---\n\n");
+    
         if (clientes.isEmpty()) {
-            System.out.println("Nenhum cliente cadastrado.");
-            return;
+            sb.append("Nenhum cliente cadastrado.");
+        } else {
+            for (model.Cliente c : clientes) {
+                sb.append("Nome: ").append(c.getNome()).append("\n");
+                sb.append("CPF:  ").append(c.getCpf()).append("\n");
+                sb.append("-------------------------\n");
+            }
         }
-        for (Cliente cliente : clientes) {
-            cliente.exibeCliente(); 
-            System.out.println(); 
-        }
+        return sb.toString();
     }
     
     @Override
@@ -574,7 +337,7 @@ public class Concessionaria implements OperacoesConcessionaria{
             double valor = lerDouble("Digite o valor da venda: ");
      
             System.out.print("Cliente da venda: ");
-            Cliente cliente = consultarCliente();
+            //Cliente cliente = consultarCliente();
             
             System.out.print("O funcionario da venda: ");
             Funcionario funcionario = consultarFuncionario();
@@ -582,8 +345,8 @@ public class Concessionaria implements OperacoesConcessionaria{
             System.out.println("O veículo da venda: ");
             Veiculo veiculo = consultarVeiculo();
             
-            Venda novaVenda = new Venda(data, valor, cliente, funcionario, veiculo);
-            this.vendas.add(novaVenda);
+            //Venda novaVenda = new Venda(data, valor, cliente, funcionario, veiculo);
+            //this.vendas.add(novaVenda);
             
             System.out.println("Veiculo cadastrado com sucesso!");
         }
@@ -629,7 +392,7 @@ public class Concessionaria implements OperacoesConcessionaria{
             double novoValor = lerDouble("Digite o novo valor da venda: ");
             
             System.out.print("Altere o cliente da venda: ");
-            Cliente novoCliente = consultarCliente();
+            //Cliente novoCliente = consultarCliente();
            
             System.out.print("Altere o funcionario da venda: ");
             Funcionario novoFuncionario = consultarFuncionario();
@@ -639,7 +402,7 @@ public class Concessionaria implements OperacoesConcessionaria{
             
             vendaParaAlterar.setData(novaData);
             vendaParaAlterar.setValor(novoValor);
-            vendaParaAlterar.setCliente(novoCliente);
+           // vendaParaAlterar.setCliente(novoCliente);
             vendaParaAlterar.setFuncionario(novoFuncionario);
             vendaParaAlterar.setVeiculo(novoVeiculo);
 
